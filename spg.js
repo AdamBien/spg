@@ -1,14 +1,10 @@
 #!/usr/bin/jjs -fv
-var homeDir = $ENV.SPG_HOME;
 if(arguments.length === 0){
     print("Hint: no parameters specified, invoke with spg.js -- [input.dir] [output.dir]");
 }
 var inputDir = arguments[0];
 var outputDir = arguments[1];
-if(undefined === homeDir){
-    print("No SPG_HOME is defined, using the current directory")
-    homeDir = ".";
-}
+
 if(undefined === inputDir){
     inputDir = "./input";
     print("Reading from ${inputDir}")
@@ -18,6 +14,13 @@ if(undefined === outputDir){
     outputDir = "./output";
     print("Writing to ${outputDir}")
 }
+
+var homeDir = $ENV.SPG_HOME;
+if (undefined === homeDir) {
+    print("No SPG_HOME is defined, using the current directory")
+    homeDir = ".";
+}
+
 var Files = Java.type("java.nio.file.Files");
 var Paths = Java.type("java.nio.file.Paths");
 var JString = Java.type("java.lang.String");
@@ -66,7 +69,6 @@ function process(content,parameters) {
     return output;
 
 }
-
 
 function write(content, file) {
     var output = "${outputDir}/${file}";
