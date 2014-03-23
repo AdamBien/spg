@@ -1,5 +1,9 @@
 #!/usr/bin/jjs -fv
-load("./lib/mustache.js")
+var homeDir = $ENV.SPG_HOME;
+if(undefined === homeDir){
+    print("No SPG_HOME is defined, using the current directory")
+    homeDir = ".";
+}
 var Files = Java.type("java.nio.file.Files");
 var Paths = Java.type("java.nio.file.Paths");
 var JString = Java.type("java.lang.String");
@@ -7,6 +11,7 @@ var inputDir = "./input";
 var outputDir = "./output";
 var extension = ".htm";
 var parameterExtension = ".json";
+load("${homeDir}/lib/mustache.js");
 generate();
 
 function generate() {
