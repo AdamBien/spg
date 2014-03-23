@@ -22,6 +22,7 @@ var Files = Java.type("java.nio.file.Files");
 var Paths = Java.type("java.nio.file.Paths");
 var JString = Java.type("java.lang.String");
 var extension = ".htm";
+var debug = false;
 var parameterExtension = ".json";
 load("${homeDir}/lib/mustache.js");
 generate();
@@ -34,7 +35,9 @@ function generate() {
         print(fileName);
     var extensionIndex = fileName.indexOf(extension);
     var fileWithoutExtension = fileName.substring(0, extensionIndex);
-    print("File without extension ${fileWithoutExtension}");
+    if(debug){
+        print("File without extension ${fileWithoutExtension}");
+    }
     write(
         process(read(fileName),loadParameters(fileWithoutExtension)),
         fileName);
@@ -53,9 +56,13 @@ function loadParameters(file){
 
 }
 function process(content,parameters) {
-    print("Processing: ${content} with ${parameters}")
+    if(debug){
+        print("Processing: ${content} with ${parameters}");
+    }
     var output = Mustache.render(content,parameters);
-    print("Rendered ${output}");
+    if(debug){
+        print("Rendered ${output}");
+    }
     return output;
 
 }
@@ -63,7 +70,10 @@ function process(content,parameters) {
 
 function write(content, file) {
     var output = "${outputDir}/${file}";
-    print(typeof content);
-    print("Writing ${content} to ${output}");
+    if(debug){
+        print(typeof content);
+        print("Writing ${content} to ${output}");
+    }
+    print("Writing: ${file}")
     Files.write(Paths.get(output), new JString(content).bytes);
 }
