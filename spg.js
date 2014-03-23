@@ -1,14 +1,26 @@
 #!/usr/bin/jjs -fv
 var homeDir = $ENV.SPG_HOME;
+if(arguments.length === 0){
+    print("Hint: no parameters specified, invoke with spg.js -- [input.dir] [output.dir]");
+}
+var inputDir = arguments[1];
+var outputDir = arguments[2];
 if(undefined === homeDir){
     print("No SPG_HOME is defined, using the current directory")
     homeDir = ".";
 }
+if(undefined === inputDir){
+    inputDir = "./input/";
+    print("Reading from ${inputDir}")
+}
+
+if(undefined === outputDir){
+    outputDir = "./input/";
+    print("Writing to ${outputDir}")
+}
 var Files = Java.type("java.nio.file.Files");
 var Paths = Java.type("java.nio.file.Paths");
 var JString = Java.type("java.lang.String");
-var inputDir = "./input";
-var outputDir = "./output";
 var extension = ".htm";
 var parameterExtension = ".json";
 load("${homeDir}/lib/mustache.js");
