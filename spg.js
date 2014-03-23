@@ -3,19 +3,19 @@ var homeDir = $ENV.SPG_HOME;
 if(arguments.length === 0){
     print("Hint: no parameters specified, invoke with spg.js -- [input.dir] [output.dir]");
 }
-var inputDir = arguments[1];
-var outputDir = arguments[2];
+var inputDir = arguments[0];
+var outputDir = arguments[1];
 if(undefined === homeDir){
     print("No SPG_HOME is defined, using the current directory")
     homeDir = ".";
 }
 if(undefined === inputDir){
-    inputDir = "./input/";
+    inputDir = "./input";
     print("Reading from ${inputDir}")
 }
 
 if(undefined === outputDir){
-    outputDir = "./input/";
+    outputDir = "./output";
     print("Writing to ${outputDir}")
 }
 var Files = Java.type("java.nio.file.Files");
@@ -27,6 +27,7 @@ load("${homeDir}/lib/mustache.js");
 generate();
 
 function generate() {
+    print("Reading from ${inputDir}, writing to ${outputDir}")
     var directories = Files.newDirectoryStream(Paths.get(inputDir), "*${extension}").iterator();
     while (directories.hasNext()) {
         var fileName = directories.next().getFileName().toString();
