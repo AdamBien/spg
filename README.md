@@ -35,9 +35,8 @@ You can also pass the folders as arguments
  ```
 
 
- # References
+# SPG in Action
 
- spg is used to maintain the [http://workshops.adam-bien.com](http://workshops.adam-bien.com) pages and particularly the
- workshop dates and badges.
+1. spg is used to maintain the [http://workshops.adam-bien.com](http://workshops.adam-bien.com) pages and particularly the workshop dates and badges.
 
 
