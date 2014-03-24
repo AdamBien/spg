@@ -16,15 +16,17 @@ Static Page Generator based on Nashorn, Java 8 and Mustache
 # Usage
 
 spg heavily relies on conventions. Executing:
-```java
+```javascript
  spg.js
  ```
- will read any *.htm file process it with *.json from input folder and write the resulting *.htm file into output.
+ will read any `*.htm` file process it with `*.json from input folder and write the resulting `*.htm` file into output.
 
- input/index.htm [mustache template](http://mustache.github.io/mustache.5.html)
- input/index.json (mustache view / json)
+ ## Sample:
 
- output/index.htm -> the result.
+ [input/index.htm](https://github.com/AdamBien/spg/blob/master/input/input.htm) [mustache template](http://mustache.github.io/mustache.5.html)
+ [input/index.json](https://github.com/AdamBien/spg/blob/master/input/input.json) (mustache view / json)
+
+ [output/index.htm](https://github.com/AdamBien/spg/blob/master/output/input.htm) -> the result.
 
  # References
 
