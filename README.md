@@ -19,9 +19,10 @@ spg heavily relies on conventions. Executing:
 ```javascript
  spg.js
  ```
- will read any `[name].htm` file process it with `[name].json` from input folder and write the resulting `[name].htm` file in output folder.
+ 
+will read any `[name].htm` file process it with `[name].json` from input folder and write the resulting `[name].htm` file in output folder.
 
- ## Sample:
+## Sample
 
  1. [input/index.htm](https://github.com/AdamBien/spg/blob/master/input/input.htm) (mustache template) [syntax](http://mustache.github.io/mustache.5.html)
  2. [input/index.json](https://github.com/AdamBien/spg/blob/master/input/input.json) (mustache view / json)
