@@ -1,4 +1,4 @@
-#!/usr/bin/jjs -fv
+#!/usr/bin/jjs -fv --language=es6
 if(arguments.length === 0){
     print("Hint: no parameters specified, invoke with spg.js -- [input.dir] [output.dir]");
 }
@@ -24,7 +24,7 @@ if (undefined === homeDir) {
 var Files = Java.type("java.nio.file.Files");
 var Paths = Java.type("java.nio.file.Paths");
 var JString = Java.type("java.lang.String");
-var extension = ".htm";
+var extension = "*.{htm,html,xml}";
 var debug = false;
 var parameterExtension = ".json";
 load("${homeDir}/lib/mustache.js");
@@ -32,11 +32,11 @@ generate();
 
 function generate() {
     print("Reading from ${inputDir}, writing to ${outputDir}")
-    var directories = Files.newDirectoryStream(Paths.get(inputDir), "*${extension}").iterator();
+    var directories = Files.newDirectoryStream(Paths.get(inputDir), "${extension}").iterator();
     while (directories.hasNext()) {
         var fileName = directories.next().getFileName().toString();
         print(fileName);
-    var extensionIndex = fileName.indexOf(extension);
+    var extensionIndex = fileName.lastIndexOf(".");
     var fileWithoutExtension = fileName.substring(0, extensionIndex);
     if(debug){
         print("File without extension ${fileWithoutExtension}");
