@@ -29,6 +29,33 @@ var debug = false;
 var parameterExtension = ".json";
 //load("${homeDir}/lib/mustache.js");
 load("${homeDir}/lib/handlebars-v4.0.12.js")
+
+Handlebars.registerHelper("subtract", subtract);
+Handlebars.registerHelper("add", add);
+Handlebars.registerHelper("multiply", multiply);
+Handlebars.registerHelper("divide", divide);
+
+function subtract(lvalue, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return lvalue - rvalue;
+}
+function add(lvalue, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return lvalue - rvalue;
+}
+function multiply(lvalue, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return lvalue * rvalue;
+}
+function divide(lvalue, rvalue, options) {
+    lvalue = parseFloat(lvalue);
+    rvalue = parseFloat(rvalue);
+    return lvalue / rvalue;
+}
+
 generate();
 
 function generate() {
@@ -42,9 +69,11 @@ function generate() {
     if(debug){
         print("File without extension ${fileWithoutExtension}");
     }
-        write(
-        process(compileTemplate(read(fileName)),loadParameters(fileWithoutExtension)),
-        fileName);
+        let rawTemplate = read(fileName);
+        let compiledTemplate = compileTemplate(rawTemplate);
+        let parameters = loadParameters(fileWithoutExtension);
+        let result = process(compiledTemplate,parameters);
+        write(result,fileName);
     }
 }
 
@@ -85,3 +114,4 @@ function write(content, file) {
     print("Writing: ${file}")
     Files.write(Paths.get(output), new JString(content).bytes);
 }
+
