@@ -27,7 +27,8 @@ var JString = Java.type("java.lang.String");
 var extension = "*.{htm,html,xml}";
 var debug = false;
 var parameterExtension = ".json";
-load("${homeDir}/lib/mustache.js");
+//load("${homeDir}/lib/mustache.js");
+load("${homeDir}/lib/handlebars-v4.0.12.js")
 generate();
 
 function generate() {
@@ -62,7 +63,9 @@ function process(content,parameters) {
     if(debug){
         print("Processing: ${content} with ${parameters}");
     }
-    var output = Mustache.render(content,parameters);
+//    var output = Mustache.render(content,parameters);
+    var template = Handlebars.compile(content);
+    var output = template(parameters);
     if(debug){
         print("Rendered ${output}");
     }
