@@ -42,8 +42,8 @@ function generate() {
     if(debug){
         print("File without extension ${fileWithoutExtension}");
     }
-    write(
-        process(read(fileName),loadParameters(fileWithoutExtension)),
+        write(
+        process(compileTemplate(read(fileName)),loadParameters(fileWithoutExtension)),
         fileName);
     }
 }
@@ -59,18 +59,21 @@ function loadParameters(file){
     return JSON.parse(parameterContent);
 
 }
-function process(content,parameters) {
+
+function compileTemplate(content) { 
+    return Handlebars.compile(content);
+}
+
+function process(template,parameters) {
     if(debug){
         print("Processing: ${content} with ${parameters}");
     }
-//    var output = Mustache.render(content,parameters);
-    var template = Handlebars.compile(content);
+
     var output = template(parameters);
     if(debug){
         print("Rendered ${output}");
     }
     return output;
-
 }
 
 function write(content, file) {
